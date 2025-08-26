@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume/CV Builder Online</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        fontFamily: { inter: ['Inter','ui-sans-serif','system-ui'], poppins: ['Poppins','Inter','sans-serif'] }
+      }},
+      darkMode: 'class'
+    }
+  </script>
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Resume/CV Builder Online – isi form di kiri, lihat preview real‑time di kanan, export PDF, pilih tema & template.">
+</head>
+<body class="font-inter bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+  <header class="sticky top-0 z-20 border-b bg-white/70 backdrop-blur dark:bg-gray-900/70">
+    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
+      <h1 class="text-lg sm:text-xl font-semibold flex items-center gap-2">
+        <span class="text-primary">🧰</span> Resume/CV Builder
+      </h1>
+      <div class="flex items-center gap-2">
+        <button id="darkToggle" class="px-3 py-1.5 rounded-lg border text-sm hover:bg-gray-100 dark:hover:bg-gray-800" title="Toggle Dark Mode">🌗 Mode</button>
+        <button id="resetBtn" class="px-3 py-1.5 rounded-lg border text-sm hover:bg-gray-100 dark:hover:bg-gray-800" title="Reset form & hapus riwayat">↺ Reset</button>
+        <button id="downloadBtn" class="px-3 py-1.5 rounded-lg bg-primary text-white text-sm rounded-xl shadow hover:opacity-90">⬇️ PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 py-6 grid gap-6 lg:grid-cols-2">
+    <!-- Left: Form -->
+    <section class="space-y-6">
+      <div class="rounded-2xl border bg-white p-4 dark:bg-gray-900 dark:border-gray-800">
+        <h2 class="text-base font-semibold mb-3">Data Pribadi</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <label class="block">Nama
+            <input id="name" class="input" placeholder="Nama lengkap" required />
+          </label>
+          <label class="block">Jabatan / Headline
+            <input id="headline" class="input" placeholder="Frontend Developer" />
+          </label>
+          <label class="block">Email
+            <input id="email" type="email" class="input" placeholder="nama@email.com" />
+          </label>
+          <label class="block">No. HP
+            <input id="phone" class="input" placeholder="08xxxxxxx" />
+          </label>
+          <label class="block sm:col-span-2">Alamat
+            <input id="address" class="input" placeholder="Kota, Negara" />
+          </label>
+          <label class="block sm:col-span-2">Ringkasan Profil
+            <textarea id="summary" class="input h-24" placeholder="Ringkas tentang diri, kekuatan, dan tujuan karier."></textarea>
+          </label>
+          <label class="block">Website/Portofolio
+            <input id="website" class="input" placeholder="https://"/>
+          </label>
+          <label class="block">LinkedIn
+            <input id="linkedin" class="input" placeholder="https://linkedin.com/in/username"/>
+          </label>
+          <label class="block">GitHub
+            <input id="github" class="input" placeholder="https://github.com/username"/>
+          </label>
+          <label class="block">Foto (URL opsional)
+            <input id="photo" class="input" placeholder="https://…/photo.jpg" />
+          </label>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="card">
+        <div class="flex items-center justify-between">
+          <h2 class="section-title">Pendidikan</h2>
+          <button data-action="add-education" class="btn-secondary">+ Tambah</button>
+        </div>
+        <div id="educationList" class="space-y-3"></div>
+      </div>
+
+      <!-- Experience -->
+      <div class="card">
+        <div class="flex items-center justify-between">
+          <h2 class="section-title">Pengalaman</h2>
+          <button data-action="add-experience" class="btn-secondary">+ Tambah</button>
+        </div>
+        <div id="experienceList" class="space-y-3"></div>
+      </div>
+
+      <!-- Projects -->
+      <div class="card">
+        <div class="flex items-center justify-between">
+          <h2 class="section-title">Project</h2>
+          <button data-action="add-project" class="btn-secondary">+ Tambah</button>
+        </div>
+        <div id="projectList" class="space-y-3"></div>
+      </div>
+
+      <!-- Skills -->
+      <div class="card">
+        <h2 class="section-title">Skill</h2>
+        <div class="flex gap-2">
+          <input id="skillInput" class="input" placeholder="Tambahkan skill, tekan Enter" />
+          <button id="addSkillBtn" class="btn-secondary">Tambah</button>
+        </div>
+        <div id="skillsChips" class="mt-2 flex flex-wrap gap-2"></div>
+      </div>
+
+      <!-- Settings -->
+      <div class="card">
+        <h2 class="section-title">Tampilan</h2>
+        <div class="grid sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-sm font-medium mb-1">Tema Warna</label>
+            <div class="flex items-center gap-2">
+              <label class="theme-swatch theme-blue"><input type="radio" name="theme" value="blue" checked> Biru</label>
+              <label class="theme-swatch theme-green"><input type="radio" name="theme" value="green"> Hijau</label>
+              <label class="theme-swatch theme-gray"><input type="radio" name="theme" value="gray"> Abu</label>
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1">Template CV</label>
+            <select id="templateSelect" class="input">
+              <option value="classic">Classic Professional</option>
+              <option value="modern">Modern Bubble</option>
+            </select>
+          </div>
+        </div>
+        <div class="mt-3 flex flex-wrap items-center gap-2">
+          <label class="flex items-center gap-2 text-sm"><input id="showQR" type="checkbox" /> Tampilkan QR di footer (LinkedIn/GitHub)</label>
+          <button id="shareBtn" class="btn-secondary">🔗 Share CV</button>
+          <button id="exportBtn" class="btn-secondary">⤴️ Export JSON</button>
+          <label class="btn-secondary cursor-pointer">⤵️ Import JSON <input id="importFile" type="file" accept="application/json" class="hidden" /></label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: Preview -->
+    <section>
+      <div id="previewWrap" class="rounded-2xl border bg-white p-0 overflow-hidden dark:bg-gray-900 dark:border-gray-800">
+        <div id="cvPreview" class="preview theme-blue template-classic">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mx-auto max-w-7xl px-4 pb-10 text-xs text-gray-500">
+    <p>Made with ❤️ for portfolio showcasing. Data disimpan lokal di browser Anda.</p>
+  </footer>
+
+  <!-- html2pdf & QRCode libs (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- App JS -->
+  <script src="script.js"></script>
+</body>
+</html>
