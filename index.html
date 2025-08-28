@@ -11,15 +11,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind = { config: {
+    tailwind.config = {
       theme: { extend: {
         fontFamily: { inter: ['Inter','ui-sans-serif','system-ui'], poppins: ['Poppins','Inter','sans-serif'] }
       }},
       darkMode: 'class'
-    }};
+    }
   </script>
-  <script defer src="https://cdn.tailwindcss.com"></script>
 
   <!-- App CSS -->
   <link rel="stylesheet" href="style.css">
@@ -32,7 +32,7 @@
         <span class="text-primary">🧰</span> Resume/CV Builder
       </h1>
       <div class="flex items-center gap-2">
-        <!-- <button id="darkToggle" class="px-3 py-1.5 rounded-lg border text-sm hover:bg-gray-100 dark:hover:bg-gray-800" title="Toggle Dark Mode">🌗 Mode</button> -->
+        <button id="darkToggle" class="px-3 py-1.5 rounded-lg border text-sm hover:bg-gray-100 dark:hover:bg-gray-800" title="Toggle Dark Mode">🌗 Mode</button>
         <button id="resetBtn" class="px-3 py-1.5 rounded-lg border text-sm hover:bg-gray-100 dark:hover:bg-gray-800" title="Reset form & hapus riwayat">↺ Reset</button>
         <button id="downloadBtn" class="px-3 py-1.5 rounded-lg bg-primary text-white text-sm rounded-xl shadow hover:opacity-90">⬇️ PDF</button>
       </div>

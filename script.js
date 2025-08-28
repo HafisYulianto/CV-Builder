@@ -1,9 +1,9 @@
 /*
  * Resume/CV Builder Online — FINAL
- * - Tema ditempel ke <html> + preview (fix)
- * - Defensive binding, fallback tombol, drag&drop
- * - Foto dikompres sebelum simpan (cepat & hemat)
- * - Persist throttled, html2pdf & qrcode lazy-load
+ * - Tema ditempel ke <html> + preview
+ * - Ringkasan justify (pakai paragraf)
+ * - Defensive binding, drag&drop, foto dikompres, persist throttled
+ * - html2pdf & qrcode lazy-load
  */
 
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -168,7 +168,7 @@ function bindCoreEvents() {
     if (action === 'remove-item')    removeItem(btn.dataset.section, +btn.dataset.index);
   });
 
-  // Fallback direct bind untuk 3 tombol ini
+  // Fallback direct bind (jaga-jaga)
   const btnAddCert = $('button[data-action="add-certificate"]');
   if (btnAddCert) btnAddCert.addEventListener('click', (e)=>{ e.preventDefault(); addCertificate(); });
   const btnAddLang = $('button[data-action="add-language"]');
@@ -460,7 +460,7 @@ function renderSkillChips() {
 
 /* ---------- Theme & Template ---------- */
 function applyTheme() {
-  // TERA PENTING: kelas tema di-root (html) + preview
+  // tempel kelas tema ke root + preview
   const targets = [document.documentElement, els.preview];
   targets.forEach(el => {
     if (!el) return;
@@ -497,11 +497,11 @@ function render() {
   h.push('</div>');
   h.push('</header>');
 
-  // Summary
+  // Summary (justify)
   if (state.summary) {
-    h.push('<section class="cv-section">');
+    h.push('<section class="cv-section cv-summary">');
     h.push('<div class="cv-sec-title">Ringkasan</div>');
-    h.push(`<div class="bubble text-sm leading-relaxed">${nl2br(esc(state.summary))}</div>`);
+    h.push(`<div class="bubble text-sm leading-relaxed">${formatSummary(state.summary)}</div>`);
     h.push('</section>');
   }
 
@@ -662,7 +662,13 @@ async function downloadPDF() {
 function esc(s='') { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c])); }
 function nl2br(s='') { return s.replace(/\n/g, '<br>'); }
 
-// Simple i18n error
+// Ringkasan → paragraf (agar bisa justify)
+function formatSummary(s = '') {
+  const paras = String(s).split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+  return paras.map(p => `<p>${esc(p.replace(/\n+/g, ' '))}</p>`).join('');
+}
+
+// Validasi singkat
 const LANG = {
   id: {
     name: "Nama wajib diisi", email: "Format email tidak valid", phone: "Nomor HP tidak valid",
@@ -684,7 +690,7 @@ function validateField(id) {
   return valid;
 }
 
-// Resize gambar sebelum simpan (biar ringan)
+// Resize gambar sebelum simpan (ringan)
 function resizeImage(file, maxSide = 512, quality = 0.85) {
   return new Promise((resolve, reject) => {
     const fr = new FileReader();

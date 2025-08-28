@@ -46,6 +46,15 @@
 .template-elegant .cv-name { font-family: 'Poppins', serif; font-size: 32px; color: var(--primary);}
 .template-minimalist .cv-header, .template-minimalist .cv-section { background: #fff; border: none;}
 
+/* Ringkasan: rata kanan-kiri */
+.cv-summary .bubble {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+.cv-summary .bubble p { margin: 0 0 .5rem 0; }
+.cv-summary .bubble p:last-child { margin-bottom: 0; }
+
 /* Print helpers */
 @media print {
   body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
