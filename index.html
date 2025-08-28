@@ -43,17 +43,20 @@
       <div class="rounded-2xl border bg-white p-4 dark:bg-gray-900 dark:border-gray-800">
         <h2 class="text-base font-semibold mb-3">Data Pribadi</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <label class="block">Nama
+          <label class="block" data-label="name">Nama
             <input id="name" class="input" placeholder="Nama lengkap" required />
+            <div id="error-name" class="text-xs text-red-600 mt-1"></div>
           </label>
           <label class="block">Jabatan / Headline
             <input id="headline" class="input" placeholder="Frontend Developer" />
           </label>
           <label class="block">Email
             <input id="email" type="email" class="input" placeholder="nama@email.com" />
+            <div id="error-email" class="text-xs text-red-600 mt-1"></div>
           </label>
           <label class="block">No. HP
             <input id="phone" class="input" placeholder="08xxxxxxx" />
+            <div id="error-phone" class="text-xs text-red-600 mt-1"></div>
           </label>
           <label class="block sm:col-span-2">Alamat
             <input id="address" class="input" placeholder="Kota, Negara" />
@@ -63,16 +66,20 @@
           </label>
           <label class="block">Website/Portofolio
             <input id="website" class="input" placeholder="https://"/>
+            <div id="error-website" class="text-xs text-red-600 mt-1"></div>
           </label>
           <label class="block">LinkedIn
             <input id="linkedin" class="input" placeholder="https://linkedin.com/in/username"/>
+            <div id="error-linkedin" class="text-xs text-red-600 mt-1"></div>
           </label>
           <label class="block">GitHub
             <input id="github" class="input" placeholder="https://github.com/username"/>
+            <div id="error-github" class="text-xs text-red-600 mt-1"></div>
           </label>
-          <label class="block">Foto (URL opsional)
-            <input id="photo" class="input" placeholder="https://…/photo.jpg" />
+          <label class="block">Upload Foto
+            <input id="photoFile" type="file" accept="image/*" class="input" />
           </label>
+          <div id="photoPreview" class="mt-2"></div>
         </div>
       </div>
 
@@ -130,6 +137,8 @@
             <select id="templateSelect" class="input">
               <option value="classic">Classic Professional</option>
               <option value="modern">Modern Bubble</option>
+              <option value="elegant">Elegant</option>
+              <option value="minimalist">Minimalist</option>
             </select>
           </div>
         </div>
@@ -139,6 +148,36 @@
           <button id="exportBtn" class="btn-secondary">⤴️ Export JSON</button>
           <label class="btn-secondary cursor-pointer">⤵️ Import JSON <input id="importFile" type="file" accept="application/json" class="hidden" /></label>
         </div>
+        <label class="block">Custom QR Link
+          <input id="qrCustom" class="input" placeholder="https://link-anda.com" />
+        </label>
+      </div>
+
+      <!-- Certificates -->
+      <div class="card">
+        <div class="flex items-center justify-between">
+          <h2 class="section-title">Sertifikat</h2>
+          <button data-action="add-certificate" class="btn-secondary">+ Tambah</button>
+        </div>
+        <div id="certificateList" class="space-y-3"></div>
+      </div>
+
+      <!-- Languages -->
+      <div class="card">
+        <div class="flex items-center justify-between">
+          <h2 class="section-title">Bahasa</h2>
+          <button data-action="add-language" class="btn-secondary">+ Tambah</button>
+        </div>
+        <div id="languageList" class="space-y-3"></div>
+      </div>
+
+      <!-- References -->
+      <div class="card">
+        <div class="flex items-center justify-between">
+          <h2 class="section-title">Referensi</h2>
+          <button data-action="add-reference" class="btn-secondary">+ Tambah</button>
+        </div>
+        <div id="referenceList" class="space-y-3"></div>
       </div>
     </section>
 
@@ -148,6 +187,11 @@
         <div id="cvPreview" class="preview theme-blue template-classic">
           <!-- Filled by JS -->
         </div>
+      </div>
+      <div class="flex gap-2 mt-2">
+        <button id="previewDesktop" class="btn-secondary">Desktop</button>
+        <button id="previewMobile" class="btn-secondary">Mobile</button>
+        <button id="previewA4" class="btn-secondary">A4</button>
       </div>
     </section>
   </main>
@@ -159,6 +203,7 @@
   <!-- html2pdf & QRCode libs (CDN) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
 
   <!-- App JS -->
   <script src="script.js"></script>

@@ -33,12 +33,17 @@
 .preview .item-sub { font-size: 12px; color: #6b7280; }
 .preview .skill-chip { display: inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(37,99,235,.08); border: 1px solid rgba(37,99,235,.15); margin: 4px; font-size: 12px; }
 .preview .qr-wrap { display: flex; align-items: center; justify-content: flex-end; padding: 0 28px 24px; gap: 12px; }
-
+.preview-mobile .cv-page { max-width: 375px !important; }
+.preview-a4 .cv-page { max-width: 794px !important; min-height: 1123px; box-shadow: 0 0 0 1px #ccc; }
 /* Template: Classic */
 .template-classic .cv-section { background: #fff; }
 /* Template: Modern Bubble */
 .template-modern .cv-section { background: #f8fafc; }
 .template-modern .cv-sec-title { background: var(--primary); color: white; display: inline-block; padding: 4px 10px; border-radius: 999px; }
+/* Template: Elegant */
+.template-elegant .cv-header { background: #f3f4f6; border-bottom: 2px solid var(--primary);}
+.template-elegant .cv-name { font-family: 'Poppins', serif; font-size: 32px; color: var(--primary);}
+.template-minimalist .cv-header, .template-minimalist .cv-section { background: #fff; border: none;}
 
 /* Print helpers */
 @media print {
