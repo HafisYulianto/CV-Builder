@@ -183,15 +183,24 @@ function bindCoreEvents() {
   // Preview size
   if (els.previewDesktop) els.previewDesktop.addEventListener('click', () => {
     els.preview.classList.remove('preview-mobile','preview-a4');
+    $$('#previewDesktop, #previewMobile, #previewA4').forEach(b => b.classList.remove('active-preview'));
+    els.previewDesktop.classList.add('active-preview');
   });
   if (els.previewMobile) els.previewMobile.addEventListener('click', () => {
     els.preview.classList.add('preview-mobile');
     els.preview.classList.remove('preview-a4');
+    $$('#previewDesktop, #previewMobile, #previewA4').forEach(b => b.classList.remove('active-preview'));
+    els.previewMobile.classList.add('active-preview');
   });
   if (els.previewA4) els.previewA4.addEventListener('click', () => {
     els.preview.classList.add('preview-a4');
     els.preview.classList.remove('preview-mobile');
+    $$('#previewDesktop, #previewMobile, #previewA4').forEach(b => b.classList.remove('active-preview'));
+    els.previewA4.classList.add('active-preview');
   });
+
+  // Set default active button
+  els.previewDesktop.classList.add('active-preview');
 
   // Validasi ringkas on blur
   ['name','email','website','linkedin','github','phone'].forEach(id => {
@@ -481,8 +490,8 @@ function render() {
   // Header
   h.push('<header class="cv-header">');
   h.push('<div>');
-  h.push(`<div class="cv-name">${esc(state.name)||'Nama Lengkap'}</div>`);
-  h.push(`<div class="cv-headline">${esc(state.headline)||'Jabatan / Headline'}</div>`);
+  h.push(`<div class="cv-name">${esc(state.name)||'[Nama Lengkap]'}</div>`);
+  h.push(`<div class="cv-headline">${esc(state.headline)||'[Jabatan / Headline]'}</div>`);
   h.push('<div class="cv-meta">');
   if (state.email)   h.push(`<span>✉️ ${esc(state.email)}</span>`);
   if (state.phone)   h.push(`<span>📞 ${esc(state.phone)}</span>`);

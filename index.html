@@ -1,211 +1,220 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Resume/CV Builder Online</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-  <!-- Tailwind (CDN) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: { extend: {
-        fontFamily: { inter: ['Inter','ui-sans-serif','system-ui'], poppins: ['Poppins','Inter','sans-serif'] }
-      }},
-      darkMode: 'class'
-    }
-  </script>
-
-  <!-- App CSS -->
+  <title>Resume/CV Builder Online - Premium</title>
   <link rel="stylesheet" href="style.css">
-  <meta name="description" content="Resume/CV Builder Online – isi form di kiri, lihat preview real-time di kanan, export PDF, pilih tema & template.">
+  <meta name="description" content="Resume/CV Builder Online – Buat CV profesional dengan real-time preview, multiple templates, dan export PDF.">
 </head>
-<body class="font-inter bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
-  <header class="sticky top-0 z-20 border-b bg-white/70 backdrop-blur dark:bg-gray-900/70">
-    <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
-      <h1 class="text-lg sm:text-xl font-semibold flex items-center gap-2">
-        <span class="text-primary">🧰</span> Resume/CV Builder
-      </h1>
-      <div class="flex items-center gap-2">
-        <button id="darkToggle" class="px-3 py-1.5 rounded-lg border text-sm hover:bg-gray-100 dark:hover:bg-gray-800" title="Toggle Dark Mode">🌗 Mode</button>
-        <button id="resetBtn" class="px-3 py-1.5 rounded-lg border text-sm hover:bg-gray-100 dark:hover:bg-gray-800" title="Reset form & hapus riwayat">↺ Reset</button>
-        <button id="downloadBtn" class="px-3 py-1.5 rounded-lg bg-primary text-white text-sm rounded-xl shadow hover:opacity-90">⬇️ PDF</button>
+<body class="app-body">
+  <div class="bg-mesh"></div>
+  
+  <header>
+    <div style="margin: 0 auto; max-width: 1280px; padding: 1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div style="width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, #2563eb, #3b82f6); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);">
+          ✨
+        </div>
+        <div>
+          <h1 style="font-size: 1.5rem; font-weight: 700; margin: 0; color: #fff; letter-spacing: -0.5px;">ProCV<span style="color: #60a5fa;">.</span></h1>
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin: 0;">Buat CV modern dengan seketika</p>
+        </div>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <button id="darkToggle" class="btn-secondary" title="Tema">🌗 Mode Cepat</button>
+        <button id="resetBtn" class="btn-secondary" style="border-color: rgba(239, 68, 68, 0.3); color: #fca5a5;" title="Reset Form">↺ Reset</button>
+        <button id="downloadBtn" class="btn-primary">⬇️ Download PDF</button>
       </div>
     </div>
   </header>
 
-  <main class="mx-auto max-w-7xl px-4 py-6 grid gap-6 lg:grid-cols-2">
+  <main>
     <!-- Left: Form -->
-    <section class="space-y-6">
-      <div class="rounded-2xl border bg-white p-4 dark:bg-gray-900 dark:border-gray-800">
-        <h2 class="text-base font-semibold mb-3">Data Pribadi</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <label class="block" data-label="name">Nama
-            <input id="name" class="input" placeholder="Nama lengkap" required />
+    <section class="grid" style="gap: 1.5rem;">
+      <div class="card fade-in" style="animation-delay: 0.1s;">
+        <h2 class="section-title" style="margin-top:0; margin-bottom: 1.25rem;">
+          <span style="background: rgba(59,130,246,0.2); padding: 6px; border-radius: 8px;">👤</span> Data Pribadi
+        </h2>
+        <div class="grid sm:grid-cols-2">
+          <label class="block">
+            <span style="font-size: 0.875rem; font-weight: 500; color: #e2e8f0; margin-bottom: 0.5rem; display: block;">Nama Lengkap *</span>
+            <input id="name" class="input" placeholder="Masukkan nama lengkap" required />
             <div id="error-name" class="text-xs text-red-600 mt-1"></div>
           </label>
-          <label class="block">Jabatan / Headline
-            <input id="headline" class="input" placeholder="Frontend Developer" />
+          <label class="block">
+            <span style="font-size: 0.875rem; font-weight: 500; color: #e2e8f0; margin-bottom: 0.5rem; display: block;">Jabatan / Headline</span>
+            <input id="headline" class="input" placeholder="Front-End Engineer" />
           </label>
-          <label class="block">Email
+          <label class="block">
+            <span style="font-size: 0.875rem; font-weight: 500; color: #e2e8f0; margin-bottom: 0.5rem; display: block;">Email *</span>
             <input id="email" type="email" class="input" placeholder="nama@email.com" />
             <div id="error-email" class="text-xs text-red-600 mt-1"></div>
           </label>
-          <label class="block">No. HP
-            <input id="phone" class="input" placeholder="08xxxxxxx" />
+          <label class="block">
+            <span style="font-size: 0.875rem; font-weight: 500; color: #e2e8f0; margin-bottom: 0.5rem; display: block;">Nomor Telepon</span>
+            <input id="phone" class="input" placeholder="0812xxxxxx" />
             <div id="error-phone" class="text-xs text-red-600 mt-1"></div>
           </label>
-          <label class="block sm:col-span-2">Alamat
-            <input id="address" class="input" placeholder="Kota, Negara" />
+          <label class="block grid-cols-1 sm:grid-cols-2" style="grid-column: 1 / -1;">
+            <span style="font-size: 0.875rem; font-weight: 500; color: #e2e8f0; margin-bottom: 0.5rem; display: block;">Alamat</span>
+            <input id="address" class="input" placeholder="Jakarta, Indonesia" />
           </label>
-          <label class="block sm:col-span-2">Ringkasan Profil
-            <textarea id="summary" class="input h-24" placeholder="Ringkas tentang diri, kekuatan, dan tujuan karier."></textarea>
+          <label class="block" style="grid-column: 1 / -1;">
+            <span style="font-size: 0.875rem; font-weight: 500; color: #e2e8f0; margin-bottom: 0.5rem; display: block;">Ringkasan Profil</span>
+            <textarea id="summary" class="input" style="height: 100px; resize: vertical;" placeholder="Ceritakan pengalaman dan keahlian utama Anda..."></textarea>
           </label>
-          <label class="block">Website/Portofolio
-            <input id="website" class="input" placeholder="https://"/>
+          <label class="block">
+            <span style="font-size: 0.875rem; font-weight: 500; color: #e2e8f0; margin-bottom: 0.5rem; display: block;">Website / Portofolio</span>
+            <input id="website" class="input" placeholder="https://..." />
             <div id="error-website" class="text-xs text-red-600 mt-1"></div>
           </label>
-          <label class="block">LinkedIn
-            <input id="linkedin" class="input" placeholder="https://linkedin.com/in/username"/>
+          <label class="block">
+            <span style="font-size: 0.875rem; font-weight: 500; color: #e2e8f0; margin-bottom: 0.5rem; display: block;">LinkedIn</span>
+            <input id="linkedin" class="input" placeholder="https://linkedin.com/in/..." />
             <div id="error-linkedin" class="text-xs text-red-600 mt-1"></div>
           </label>
-          <label class="block">GitHub
-            <input id="github" class="input" placeholder="https://github.com/username"/>
+          <label class="block">
+            <span style="font-size: 0.875rem; font-weight: 500; color: #e2e8f0; margin-bottom: 0.5rem; display: block;">GitHub</span>
+            <input id="github" class="input" placeholder="https://github.com/..." />
             <div id="error-github" class="text-xs text-red-600 mt-1"></div>
           </label>
-          <label class="block">Upload Foto
-            <input id="photoFile" type="file" accept="image/*" class="input" />
+          <label class="block">
+            <span style="font-size: 0.875rem; font-weight: 500; color: #e2e8f0; margin-bottom: 0.5rem; display: block;">Upload Foto Profil</span>
+            <div style="position: relative;">
+               <input id="photoFile" type="file" accept="image/*" class="input" style="padding-right: 2.5rem; cursor: pointer;" />
+               <span style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); font-size: 1.125rem; pointer-events: none;">📸</span>
+            </div>
           </label>
-          <div id="photoPreview" class="mt-2"></div>
+          <div id="photoPreview" style="grid-column: 1 / -1; margin-top: 0.5rem;"></div>
         </div>
       </div>
 
       <!-- Education -->
-      <div class="card">
-        <div class="flex items-center justify-between">
-          <h2 class="section-title">Pendidikan</h2>
+      <div class="card fade-in" style="animation-delay: 0.2s;">
+        <div class="flex items-center justify-between" style="margin-bottom: 1.25rem;">
+          <h2 class="section-title" style="margin: 0;"><span style="background: rgba(59,130,246,0.2); padding: 6px; border-radius: 8px;">🎓</span> Pendidikan</h2>
           <button data-action="add-education" class="btn-secondary">+ Tambah</button>
         </div>
-        <div id="educationList" class="space-y-3"></div>
+        <div id="educationList" class="grid" style="gap: 1rem;"></div>
       </div>
 
       <!-- Experience -->
-      <div class="card">
-        <div class="flex items-center justify-between">
-          <h2 class="section-title">Pengalaman</h2>
+      <div class="card fade-in" style="animation-delay: 0.3s;">
+        <div class="flex items-center justify-between" style="margin-bottom: 1.25rem;">
+          <h2 class="section-title" style="margin: 0;"><span style="background: rgba(59,130,246,0.2); padding: 6px; border-radius: 8px;">💼</span> Pengalaman Kerja</h2>
           <button data-action="add-experience" class="btn-secondary">+ Tambah</button>
         </div>
-        <div id="experienceList" class="space-y-3"></div>
+        <div id="experienceList" class="grid" style="gap: 1rem;"></div>
       </div>
 
       <!-- Projects -->
-      <div class="card">
-        <div class="flex items-center justify-between">
-          <h2 class="section-title">Project</h2>
+      <div class="card fade-in" style="animation-delay: 0.4s;">
+        <div class="flex items-center justify-between" style="margin-bottom: 1.25rem;">
+          <h2 class="section-title" style="margin: 0;"><span style="background: rgba(59,130,246,0.2); padding: 6px; border-radius: 8px;">🚀</span> Project</h2>
           <button data-action="add-project" class="btn-secondary">+ Tambah</button>
         </div>
-        <div id="projectList" class="space-y-3"></div>
+        <div id="projectList" class="grid" style="gap: 1rem;"></div>
       </div>
 
       <!-- Skills -->
-      <div class="card">
-        <h2 class="section-title">Skill</h2>
-        <div class="flex gap-2">
-          <input id="skillInput" class="input" placeholder="Tambahkan skill, tekan Enter" />
+      <div class="card fade-in" style="animation-delay: 0.5s;">
+        <h2 class="section-title" style="margin-top: 0; margin-bottom: 1.25rem;"><span style="background: rgba(59,130,246,0.2); padding: 6px; border-radius: 8px;">⚡</span> Skill & Keahlian</h2>
+        <div class="flex gap-2" style="margin-bottom: 1rem;">
+          <input id="skillInput" class="input" placeholder="Tambahkan skill, misal: React" />
           <button id="addSkillBtn" class="btn-secondary">Tambah</button>
         </div>
-        <div id="skillsChips" class="mt-2 flex flex-wrap gap-2"></div>
+        <div id="skillsChips" class="flex" style="flex-wrap: wrap; gap: 0.5rem;"></div>
       </div>
 
       <!-- Settings -->
-      <div class="card">
-        <h2 class="section-title">Tampilan</h2>
-        <div class="grid sm:grid-cols-2 gap-3">
+      <div class="card fade-in" style="animation-delay: 0.6s;">
+        <h2 class="section-title" style="margin-top: 0; margin-bottom: 1.25rem;"><span style="background: rgba(59,130,246,0.2); padding: 6px; border-radius: 8px;">🎨</span> Tampilan & Pengaturan</h2>
+        <div class="grid sm:grid-cols-2" style="margin-bottom: 1rem;">
           <div>
-            <label class="block text-sm font-medium mb-1">Tema Warna</label>
-            <div class="flex items-center gap-2">
-              <label class="theme-swatch theme-blue"><input type="radio" name="theme" value="blue" checked> Biru</label>
-              <label class="theme-swatch theme-green"><input type="radio" name="theme" value="green"> Hijau</label>
-              <label class="theme-swatch theme-gray"><input type="radio" name="theme" value="gray"> Abu</label>
+            <label style="font-size: 0.875rem; font-weight: 500; color: #e2e8f0; margin-bottom: 0.5rem; display: block;">Tema Warna</label>
+            <div class="flex items-center gap-3">
+              <label class="theme-swatch" style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;"><input type="radio" name="theme" value="blue" checked> Biru</label>
+              <label class="theme-swatch" style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;"><input type="radio" name="theme" value="green"> Hijau</label>
+              <label class="theme-swatch" style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;"><input type="radio" name="theme" value="gray"> Abu</label>
             </div>
           </div>
           <div>
-            <label class="block text-sm font-medium mb-1">Template CV</label>
+            <label style="font-size: 0.875rem; font-weight: 500; color: #e2e8f0; margin-bottom: 0.5rem; display: block;">Template CV</label>
             <select id="templateSelect" class="input">
-              <option value="classic">Classic Professional</option>
-              <option value="modern">Modern Bubble</option>
-              <option value="elegant">Elegant</option>
-              <option value="minimalist">Minimalist</option>
+              <option value="classic">📄 Classic Professional</option>
+              <option value="modern">🎯 Modern Bubble</option>
+              <option value="elegant">✨ Elegant</option>
+              <option value="minimalist">⚙️ Minimalist</option>
             </select>
           </div>
         </div>
-        <div class="mt-3 flex flex-wrap items-center gap-2">
-          <label class="flex items-center gap-2 text-sm"><input id="showQR" type="checkbox" /> Tampilkan QR di footer (LinkedIn/GitHub)</label>
-          <button id="shareBtn" class="btn-secondary">🔗 Share CV</button>
-          <button id="exportBtn" class="btn-secondary">⤴️ Export JSON</button>
-          <label class="btn-secondary cursor-pointer">⤵️ Import JSON <input id="importFile" type="file" accept="application/json" class="hidden" /></label>
+        <div style="background: rgba(0,0,0,0.2); border-radius: 0.75rem; padding: 1rem; margin-bottom: 1rem;">
+          <div class="flex items-center" style="flex-wrap: wrap; gap: 0.75rem;">
+            <label style="display:flex; align-items:center; gap:0.5rem; font-size: 0.875rem; cursor:pointer;"><input id="showQR" type="checkbox" /> QR Code</label>
+            <button id="shareBtn" class="btn-secondary" style="padding: 0.25rem 0.75rem;">🔗 Share CV</button>
+            <button id="exportBtn" class="btn-secondary" style="padding: 0.25rem 0.75rem;">⬇️ Export JSON</button>
+            <label class="btn-secondary" style="padding: 0.25rem 0.75rem; cursor:pointer;">⬆️ Import JSON <input id="importFile" type="file" accept="application/json" class="hidden" /></label>
+          </div>
         </div>
-        <label class="block">Custom QR Link
-          <input id="qrCustom" class="input" placeholder="https://link-anda.com" />
+        <label class="block">
+          <span style="font-size: 0.875rem; font-weight: 500; color: #e2e8f0; margin-bottom: 0.5rem; display: block;">Custom QR Link</span>
+          <input id="qrCustom" class="input" placeholder="https://link-portofolio-anda.com" />
         </label>
       </div>
 
       <!-- Certificates -->
-      <div class="card">
-        <div class="flex items-center justify-between">
-          <h2 class="section-title">Sertifikat</h2>
+      <div class="card fade-in" style="animation-delay: 0.7s;">
+        <div class="flex items-center justify-between" style="margin-bottom: 1.25rem;">
+          <h2 class="section-title" style="margin: 0;"><span style="background: rgba(59,130,246,0.2); padding: 6px; border-radius: 8px;">🏆</span> Sertifikat</h2>
           <button data-action="add-certificate" class="btn-secondary">+ Tambah</button>
         </div>
-        <div id="certificateList" class="space-y-3"></div>
+        <div id="certificateList" class="grid" style="gap: 1rem;"></div>
       </div>
 
       <!-- Languages -->
-      <div class="card">
-        <div class="flex items-center justify-between">
-          <h2 class="section-title">Bahasa</h2>
+      <div class="card fade-in" style="animation-delay: 0.8s;">
+        <div class="flex items-center justify-between" style="margin-bottom: 1.25rem;">
+          <h2 class="section-title" style="margin: 0;"><span style="background: rgba(59,130,246,0.2); padding: 6px; border-radius: 8px;">🌐</span> Bahasa</h2>
           <button data-action="add-language" class="btn-secondary">+ Tambah</button>
         </div>
-        <div id="languageList" class="space-y-3"></div>
+        <div id="languageList" class="grid" style="gap: 1rem;"></div>
       </div>
 
       <!-- References -->
-      <div class="card">
-        <div class="flex items-center justify-between">
-          <h2 class="section-title">Referensi</h2>
+      <div class="card fade-in" style="animation-delay: 0.9s;">
+        <div class="flex items-center justify-between" style="margin-bottom: 1.25rem;">
+          <h2 class="section-title" style="margin: 0;"><span style="background: rgba(59,130,246,0.2); padding: 6px; border-radius: 8px;">👥</span> Referensi</h2>
           <button data-action="add-reference" class="btn-secondary">+ Tambah</button>
         </div>
-        <div id="referenceList" class="space-y-3"></div>
+        <div id="referenceList" class="grid" style="gap: 1rem;"></div>
       </div>
     </section>
 
     <!-- Right: Preview -->
     <section>
-      <div id="previewWrap" class="rounded-2xl border bg-white p-0 overflow-hidden dark:bg-gray-900 dark:border-gray-800">
-        <div id="cvPreview" class="preview template-classic">
-          <!-- Filled by JS -->
+      <div style="position: sticky; top: 100px; display: grid; gap: 1rem;">
+        <div class="card fade-in" style="animation-delay: 0.5s; padding: 0; background: transparent; border: none; box-shadow: 0 25px 50px rgba(0,0,0,0.5);">
+          <div id="previewWrap" style="max-height: 75vh; overflow-y: auto; border: 1px solid rgba(255,255,255,0.1); border-radius: 1.25rem;">
+            <div id="cvPreview" class="preview template-classic">
+              <!-- Filled by JS -->
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="flex gap-2 mt-2">
-        <button id="previewDesktop" class="btn-secondary">Desktop</button>
-        <button id="previewMobile" class="btn-secondary">Mobile</button>
-        <button id="previewA4" class="btn-secondary">A4</button>
+        <div class="flex" style="flex-wrap: wrap; gap: 0.75rem;">
+          <button id="previewDesktop" class="btn-secondary active-preview" style="flex: 1;">💻 Desktop</button>
+          <button id="previewMobile" class="btn-secondary" style="flex: 1;">📱 Mobile</button>
+          <button id="previewA4" class="btn-secondary" style="flex: 1;">📄 A4</button>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="mx-auto max-w-7xl px-4 pb-10 text-xs text-gray-500">
-    <p>Made with ❤️ for portfolio showcasing. Data disimpan lokal di browser Anda.</p>
+  <footer style="margin: 0 auto; max-width: 1280px; padding: 2rem 1rem; text-align: center; color: var(--text-muted); font-size: 0.875rem;">
+    <p>ProCV Builder &copy; 2026. Made with 💙 in modern design.</p>
   </footer>
 
-  <!-- Drag & drop (defer agar tidak blokir UI) -->
-  <script defer src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
-
-  <!-- App JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"></script>
   <script defer src="script.js"></script>
 </body>
 </html>
